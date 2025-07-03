@@ -1,0 +1,301 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/bower_components/hoteldaterangepicker/dist/css/hotel-datepicker.css" rel="stylesheet" type="text/css">
+  <!--<link href="/vendors/bower_components/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">-->
+
+{% endblock %}	
+
+{# Ventanas modales para seleccionar el cliente y el tipo de misión #}
+{% block winModal_01 %}
+
+	<div class="win-modal-content">
+		<div class="row">
+			<h4 class="panel-title">SELECCIONAR</h4>
+			<h4 class="panel-title" style="font-size:1.1rem;color:#8cadca">CLIENTE</h4>
+			<div class="col-md-12 col-lg-12">
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm-client"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearchClient" name="txtSearchClient" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblCliente" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Compañia</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div  id="newpPaginsClient" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+						</div>
+						<div class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12 text-center">
+									<a href="#" class="btn btn-dark dm-close-window-01">Retornar</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block winModal_02 %}
+
+	<div class="win-modal-content">
+		<div class="row">
+			<h4 class="panel-title">SELECCIONAR</h4>
+			<h4 class="panel-title"  style="font-size:1.1rem;color:#8cadca">TIPO DE MISIÓN</h4>
+			<div class="col-md-12 col-lg-12">
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm-typem"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearchTypem" name="txtSearchTypem" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblTipom" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Tipo de Misión</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div id="newpPaginsTypem" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4">
+						</div>
+						<div class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12 text-center">
+									<a href="#" class="btn btn-dark dm-close-window-02">Retornar</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block contentSnoopy %}
+	<!-- Row -->
+	<form action="/misiones/actualizar/{{idMission}}" method="post" autocomplete="off" name="frm_mission" data-type="n11">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="panel panel-light card-view panel-refresh dronesmaritime-form-standar">
+				<div class="refresh-container">
+					<div class="la-anim-1"></div>
+				</div>
+				<div class="panel-heading">
+					<div class="pull-left">
+						<h4 class="panel-title txt-dark">EDITAR LA MISIÓN </h4>
+						<h5 class="panel-sub-title txt-dark">Puede modificar una misión si esta tiene estatus Activo, Cuando sea asignada a un gestor no podrá.</h5>
+					</div>
+					{#<div class="pull-right">
+						<a href="#" class="pull-left inline-block refresh">
+							<i class="zmdi zmdi-replay"></i>
+						</a>
+					</div>#}
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body">
+						<div class="form-wrap">
+							<div class="row">
+								<div class="col-lg-6 col-sm-12">
+									<div class="input-group">
+										<div class="form-group label-floating">
+											<label for="id_mision" class="control-label">Id de la Misión:</label>
+											<input type="text" id="id_mision" name="id_mision"  class="form-control" autocomplete="off" readonly value="{{ mision.id_mision }}" /> 
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<h4 class="panel-title txt-dark dm-caption-text">Información del Cliente / Tipo de Misión</h4>
+								<div class="col-lg-2 col-md-12  ">
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button type="button" class="btn  btn-danger dm-button-search" id="search_client"><i class="fa fa-search"></i></button>
+										</span>									
+										<div class="form-group label-floating">
+											<label for="id_cliente" class="control-label">Identificación:</label>
+											<input type="text" id="id_cliente" name="id_cliente"  class="form-control" autocomplete="off" readonly value="{{ mision.id_cliente }}" /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="compania" class="control-label" >Nombre de Empresa:</label>
+										<input type="text" id="compania" name="compania" autocomplete="off" class="form-control" disabled value="{{ mision.compania }}" /> 
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-12  ">
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button type="button" class="btn  btn-danger dm-button-search" id="search_tipom"><i class="fa fa-search"></i></button>
+										</span>									
+										<div class="form-group label-floating">
+											<label for="id_tipom" class="control-label">Identificación:</label>
+											<input type="text" id="id_tipom" name="id_tipom"  class="form-control" autocomplete="off"  readonly value="{{mision.id_tipom}}" /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="denominacion" class="control-label" >Tipo de Misión:</label>
+										<input type="text" id="denominacion" name="denominacion" autocomplete="off" class="form-control" disabled value="mision.denominacion" /> 
+									</div>
+								</div>
+							</div>
+							<hr/>
+							<p id="infoClientText">{{mision.infoClient}}</p>
+							<div class="row">
+								<h4 class="panel-title txt-dark dm-caption-text">Datos Informativo de la misión</h4>
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="descrip" class="control-label" >Una descripción breve de la misión:</label>
+										<textarea id="descrip" name="descrip" autocomplete="off" class="form-control" maxlength="200">{{ mision.descrip }}</textarea> 
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="objetivo" class="control-label" >Objetivo General de la Misión:</label>
+										<textarea id="objetivo" name="objetivo" autocomplete="off" class="form-control">{{ mision.objetivo }}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="rango_fecha" class="control-label" >Indique la Duración de Misión:</label>
+										<input type="text" name="rango_fecha" id="rango_fecha" autocomplete="off" class="form-control" value="{{ mision.rango_fecha }}" />
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="ciudad" class="control-label" >Ciudad donde se realizara la Misíon:</label>
+										<input type="text" name="ciudad" id="ciudad" autocomplete="off" class="form-control" value="{{ mision.ciudad }}" />
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="coord" class="control-label" >Coordenadas GPS:</label>
+										<input type="text" name="coord" id="coord" autocomplete="off" class="form-control" value="{{mision.coord}}" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+
+    </div>
+
+
+    <div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-dark btn-rounded" id="addRegister">Guardar</button>
+				<a href="/misiones"  class="btn btn-dark btn-rounded" id="addRegister">Cancelar</a>
+				<input type="hidden" name="token_id" value="{{ token_id }}" class="form-control" />
+			</div>
+		</div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block footerScripts %}
+
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/fecha.min.js"></script>
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/hotel-datepicker.min.js"></script>
+
+	<script src="/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+
+
+	<script src="/web/dinamic/js/prg_mission.js"></script>
+
+	<script type="text/javascript">
+	  	var d = new Date("2020-04-13T00:00:00.000+08:00");
+  		d.toLocaleString('en-US', { timeZone: 'Europe/Andorra' })
+
+		$.material.init();
+		var stop_list = true;
+		{% if (action_system=='display') %}
+		$.toast({
+			heading: 'Ocurrió un problema!!',
+			text: '{{ msgSystem }}',
+			position: 'top-right',
+			loaderBg:'#e6b034',
+			icon: 'error',
+			hideAfter: 3500, 
+			stack: 6
+		})
+		{% endif %}
+
+		var rango_fecha=null;
+
+		$(document).ready(function(event){
+
+			var input = document.getElementById('rango_fecha');
+			rango_fecha = new HotelDatepicker(input);
+			rango_fecha.format = "DD/MM/YYYY";
+			rango_fecha.separator = " - ";
+
+		}); // fin de document ready
+	</script>
+
+	<style type="text/css">
+		.container-fluid {
+    		padding-right: 15px !important;
+    		padding-left: 15px !important;
+		}
+	</style>
+{% endblock %}

@@ -1,0 +1,396 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+  <!--<link href="/vendors/bower_components/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">-->
+
+{% endblock %}	
+
+{% block contentSnoopy %}
+
+	<!-- Row -->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<h3 class="panel-title txt-dark">REPORTAR MISIÓN</h3>
+			<h5 class="panel-sub-title txt-dark">EN ESTA AREA LOS PILOTOS PONDRÁN REPORTAR SU LABOR O EL GESTOR. </h5>
+			<hr>
+			<input type="hidden" name="idMision" id="idMision" value="{{idMision}}">
+		</div>
+	</div>
+	<div class="row mb-1">
+		<div class="col-lg-3 col-md-12 col-sm-12">
+			<p><strong>ID Misión </strong>{{plan.id_mision}}</p>
+		</div>
+		<div class="col-lg-3 col-md-12 col-sm-12">
+			<p><strong>ID Plan </strong>{{plan.id_plan}}</p>
+		</div>
+		<div class="col-lg-3 col-md-12 col-sm-12">
+			<p><strong>Gestor </strong>{{plan.id_usuario}}-{{plan.nombres}}</p>
+		</div>
+		<div class="col-lg-3 col-md-12 col-sm-12">
+			<p><strong>Horas Aproximadas </strong>{{plan.tiempo_hrs}} horas</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="panel panel-default card-view panel-refresh">
+				<div class="panel-wrapper collapse in">
+					<div class="table-wrap panel-body row">
+						<table id="tblItemsPilots" class="table table-hover mb-0" style="width:100%">
+						<thead>
+						  <tr>
+							<th>#</th>
+							<th>Piloto</th>
+							<th>Tipo</th>
+							<th>Labor</th>
+							<th>Opción</th>
+							<th>Reportado</th>
+						</tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						  </tr>	
+						</tbody>
+						</table>
+					</div>
+					<div  id="newpPaginsPilots" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+						
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	{% if not (usuario.role=='Piloto') %}
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<h5 class="panel-sub-title txt-dark">COMO GESTOR DEBE INGRESAR LA SIGUIENTE INFORMACIÓN CUANDO SE COMPLETE LOS REPORTES DE LOS PILOTOS.</h5>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+	{% for fila in piloto %}
+		{% if fila.finalizado=='S' %}
+			<div class="col-lg-2 col-md-12 col-sm-12">
+				<div class="box-item-info-pilot">
+					<p style="font-size:1.4rem;color:#6c6c6c;"><strong>{{fila.nombres}}</strong></p>
+					<p><strong>Observación Piloto:</strong></p>
+					<p style="height:10rem;overflow:hidden">{{fila.observ_final}}</p>
+					<hr>
+					<br>
+					<p><strong>Nro.Vuelos:</strong> {{fila.num_vuelo}}</p>
+					<p><strong>Total Horas :</strong> {{fila.total_hrs}}</p>
+					<p><strong>Finalizado:</strong> {{fila.hora_final}}</p>
+				</div>
+			</div>
+		{% endif %}
+	{% endfor %}
+	</div>
+	<div class="row">
+		<div class="col-lg-2 col-md-12 ">
+			<div class="form-group label-floating">
+				<label for="fecha_final" class="control-label">Fecha de Culminación</label>
+				<input type="date" id="fecha_final" name="fecha_final"  class="form-control" autocomplete="off" {{Completed=='Yes' ? '' :'disabled'  }} value="{{ plan.fecha_final }}" /> 
+			</div>
+		</div>
+		<div class="col-lg-8 col-md-12">
+			<div class="form-group label-floating">
+				<label for="observg_final" class="control-label" >Observación Final</label>
+				<input type="text" id="observg_final" name="observg_final" autocomplete="off" class="form-control" {{Completed=='Yes' ? '' :'disabled'  }} value="{{ plan.observg_final }}"/> 
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-12">
+			<div class="form-group text-right">
+				<button  class="btn btn-dark" id="saveInfo" style="border-radius:5rem 5rem;margin-top:-0.5rem;" {{Completed=='Yes' ? '' :'disabled'  }} >Guardar Información</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row area-02">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<h3 class="panel-title txt-dark">ARCHIVOS EN GOOGLE DRIVER</h3>
+			<h5 class="panel-sub-title txt-dark">SUBIR TODOS ARCHIVOS RELACIONADOS A LA MISION DONDE PUEDE CAMBIAR EL NOMBRE DEL ARCHIVO A SUBIR.</h5>
+			<hr>
+		</div>
+	</div>
+	<div class="row area-02">
+		<div class="col-lg-3 col-md-12 col-sm-12 text-center box-file-download">
+		<form name="frm_docDriver" method="post" action="/reportar/docdriver/{{idMision}}" role="form" novalidate="novalidate" enctype="multipart/form-data">
+			<h5 class="title-icono">DATOS DEL DOCUMENTO</h5>
+			<div class="icono">
+				<img src="\web\dinamic\imagen\icon-dm\archivos.png" />
+			</div>
+			<a href="#" class="btn btn-dark" style="border-radius:1rem 1rem;" id="searchFileGDriver">Seleccionar Archivo</a>
+			<input type="file" id="file_document" name="file_document" required="required" onchange="muestraImagen(event)" class="no-visible" >
+			<div id="selectInfoFile" class="box-info-file">
+				<p>No hay ningún archivo seleccionado</p>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group label-floating is-empty">
+						<label for="name_file" class="control-label" >Nombre del Archivo</label>
+						<input type="text" id="name_file" name="name_file" autocomplete="off" class="form-control"  value=""/> 
+						<input type="hidden" name="fileName" id="fileName" value="" />
+						<input type="hidden" name="fileSize" id="fileSize" value="" />
+						<input type="hidden" name="fileType" id="fileType" value="" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group label-floating is-empty">
+						<label for="descrip_arch" class="control-label" >Descripción</label>
+						<input type="text" id="descrip_arch" name="descrip_arch" autocomplete="off" class="form-control"  value=""/> 
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group label-floating is-empty">
+						<label for="tipo_archivo" class="control-label" >Tipo de Documento</label>
+						<input type="text" id="tipo_archivo" name="tipo_archivo" autocomplete="off" class="form-control"  value=""/> 
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-bottom:2rem;">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<button type="submit" class="btn btn-dark" style="border-radius:1rem 1rem;">Subir Archivo</button>
+				</div>
+			</div>
+			<input type="hidden" name="token_id" id="token_id" value="{{token_id}}">
+		</form>
+		</div>
+		<div class="col-lg-9 col-md-12 col-sm-12">
+			<div class="panel panel-default card-view panel-refresh">
+				<div class="panel-wrapper collapse in">
+					<div class="table-wrap panel-body row">
+						<table id="tblItemsFiles" class="table table-hover mb-0 table-size-files" style="width:100%;">
+						<thead>
+						  <tr>
+							<th>Archivo</th>
+							<th>Descripción</th>
+							<th>Tipo de Documento</th>
+							<th>Tamaño</th>
+							<th>Opción</th>
+						</tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						  </tr>	
+						</tbody>
+						</table>
+					</div>
+					<div  id="newpPaginsFiles" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+						
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% endblock %}
+
+{% block footerScripts %}
+	 {{ parent() }}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/web/dinamic/js/prg_reportar.js"></script>
+
+	<script type="text/javascript">
+		$.material.init();
+		var stop_list = false;
+		var idPlanG = "{{plan.id_plan}}";
+
+
+		function muestraImagen(event){
+			var file = event.target.files[0];
+			var result = false;
+
+			//console.log(file);
+
+			$("#fileName").val(file.name);
+			$("#fileSize").val(String(Math.round((file.size/100000),0)));
+			$("#fileType").val(file.type);
+
+			html = '<p><strong>Archivo: </strong>'+file.name+'</p>';
+			html += '<p><strong>Tamaño: </strong>'+Math.round((file.size/100000),0)+'Mb<strong> Tipo:</strong> '+(file.type)+'</p>';
+
+			$("#selectInfoFile").empty();
+			$("#selectInfoFile").html(html);
+
+			return true;
+		}
+
+		$(document).ready(function(e){
+			//$("#fecha_final").val('{{plan.fecha_final}}');
+		});
+
+	</script>
+	<style type="text/css">
+		hr {
+	  		border-top: 5px solid #cccccc;
+		}
+		.txt-dark {
+		    color: #19264c !important;
+		    font-weight: 500 !important;
+		}
+		p {
+			/*padding-left: 1.1rem;*/
+		}
+		.mb-1 {
+			margin-bottom: 1rem;
+		}
+		hr {
+			margin-bottom: 0.5rem;
+		}
+		.panel.panel-refresh {
+		    margin-left: 0.1rem;
+		    margin-right: 0.1rem;
+		    background-color: #d4d4d4;
+		    box-shadow: 0rem 0rem 0.2rem #464646;
+		    color:#7e7e7e;
+		}
+		.panel.panel-refresh th {
+		    color: #767676;
+		    font-weight: 800;
+		}
+		.panel.panel-refresh td {
+			border-color: #bfbfbf;
+		}
+		.panel.panel-refresh table {
+			/*border-color: #bfbfbf !important;
+			border-bottom: solid 1px;*/
+			margin-bottom: 0px !important;
+
+		}
+		.table-wrap {
+			margin-bottom: 0px !important;
+			padding-bottom: 0px !important;
+		}
+		.card-view.panel .panel-body {
+    		padding: 0px 0 20px;
+		}	
+		.card-view {
+    		padding: 0px 15px 0;
+		}
+		.reportar_piloto {
+			border-radius: 5rem;
+		}
+		#myPaginsPilots {
+			display:none;
+		}
+		.table-size-files {
+			min-height:initial;			
+		}
+		.box-info-file {
+			padding: 1rem 1rem;
+			height: 7.5rem;
+			font-size: 10px;
+		}
+		.box-info-file p {
+			font-size: 10px;
+		}
+		.form-group {
+		    margin-bottom: 0px;
+		}
+
+		.label-floating {
+			text-align: left;
+		}
+		@media (max-width: 991px) {
+			.table-wrap {
+				overflow: scroll;
+			}
+			.table-size-files {
+				min-height:initial;			
+			}
+			#saveInfo {
+				margin-bottom: 2rem;
+			}
+		}
+		.check-md-repo {
+			color:#119983;
+			margin-left:1.2rem;
+			font-size: 2rem;		
+		}
+		.table-hover > tbody > tr:hover {
+		    cursor: default !important;
+		}	
+
+		.btn:not(.btn-raised):not(.btn-link):focus, .btn:not(.btn-raised):not(.btn-link):hover, .input-group-btn .btn:not(.btn-raised):not(.btn-link):focus, .input-group-btn .btn:not(.btn-raised):not(.btn-link):hover {
+    		background-color: #231f20;
+		}
+		h3 {
+			font-size: 26px !important;
+			margin-bottom: 1rem !important;
+		}
+		input[type='text'], input[type='date'] {
+			color:#292929;
+		}
+
+		.area-02 {
+    		background: #efefef;
+    		padding-top: 1.5rem;
+    		padding-left: 1rem;
+    		padding-right: 1rem;
+		}
+		.title-icono{
+			color:#202945;
+			font-weight: 800;
+			margin-top: 1rem;
+		}
+		.icono {
+			width: 100%;
+			display: block;
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			text-align: center;
+		}
+		.icono img {
+			width: 5rem;
+			height: 5rem;
+		}
+		.box-file-download {
+		    border-radius: 1rem 1rem;
+		    background-color: #d8d8d8;
+		    margin-bottom: 2rem;
+		    border: solid #b9b9b9 1px;
+		    box-shadow: 0px 0px 1px;
+		}
+		.box-file-download input[type='text']
+		{
+    		border-bottom: #c7c1c1 solid 1px !important;
+		}
+		.box-item-info-pilot {
+			border:solid #c7c1c1 2px;
+			border-radius: 2rem 2rem;
+			padding: 1rem 1rem;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.btn-group-vertical.disabled, .btn-group-vertical:disabled, .btn-group-vertical[disabled][disabled], .btn-group.disabled, .btn-group:disabled, .btn-group[disabled][disabled], .btn.disabled, .btn:disabled, .btn[disabled][disabled], .input-group-btn .btn.disabled, .input-group-btn .btn:disabled, .input-group-btn .btn[disabled][disabled], fieldset[disabled][disabled] .btn, fieldset[disabled][disabled] .btn-group, fieldset[disabled][disabled] .btn-group-vertical, fieldset[disabled][disabled] .input-group-btn .btn {
+    			color: #fff !important;
+    			background: #000 !important;
+		}
+		.no-visible {
+			visibility: hidden;
+			height: 2px;
+		}
+		.box-item-info-pilot p {
+			font-size: 0.8rem;
+		}
+
+	</style>
+
+{% endblock %}

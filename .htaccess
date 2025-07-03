@@ -1,0 +1,56 @@
+<<<<<<< HEAD
+DirectoryIndex web/index.php
+
+# BEGIN DronesMaritime code
+
+<IfModule mod_php.c>
+   php_value max_input_vars 10000
+   php_value post_max_size 99M
+   php_value upload_max_filesize 99M
+</IfModule>
+
+<IfModule mod_php7.c>
+   php_value max_input_vars 10000
+   php_value post_max_size 99M
+   php_value upload_max_filesize 99M
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^([a-zA-Z0-9\_])$ web/reports/$1.jasper [NC,L]
+	RewriteRule ^([a-zA-Z0-9\_]+[^/])$ web/core/runtime.php?program=$1 [NC,L]
+   RewriteRule ^([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+[^/])$ web/core/runtime.php?program=$1&action=$2
+   RewriteRule ^(ajax_process)/([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+)$ web/core/ajax/ajaxprocess.php?program=$2&action=$3
+	RewriteRule ^([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+[^/])$ web/core/runtime.php?program=$1&action=$2&data=$3 [NC,L]
+</IfModule>
+
+=======
+DirectoryIndex web/index.php
+
+# BEGIN DronesMaritime code
+
+<IfModule mod_php.c>
+   php_value max_input_vars 10000
+   php_value post_max_size 99M
+   php_value upload_max_filesize 99M
+</IfModule>
+
+<IfModule mod_php7.c>
+   php_value max_input_vars 10000
+   php_value post_max_size 99M
+   php_value upload_max_filesize 99M
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^([a-zA-Z0-9\_])$ web/reports/$1.jasper [NC,L]
+	RewriteRule ^([a-zA-Z0-9\_]+[^/])$ web/core/runtime.php?program=$1 [NC,L]
+   RewriteRule ^([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+[^/])$ web/core/runtime.php?program=$1&action=$2
+   RewriteRule ^(ajax_process)/([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+)$ web/core/ajax/ajaxprocess.php?program=$2&action=$3
+	RewriteRule ^([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+)/([a-zA-Z0-9\_]+[^/])$ web/core/runtime.php?program=$1&action=$2&data=$3 [NC,L]
+</IfModule>
+
+>>>>>>> dbe41ca (New project update)
+# END DronesMaritime code

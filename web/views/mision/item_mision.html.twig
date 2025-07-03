@@ -1,0 +1,57 @@
+<div class="row screen-resoluction">
+	{# 1 Area detalle de la misión #}
+	<div class="col-lg-4 col-md-12 col-sm-12 color-dm-info-mission">
+		<div class="col-lg-4 col-sm-4 col-md-4">
+			<div class="content-imagen-dm">
+				<span class="icon-dm icon-person-1"></span>
+				<p class="text-center">{{ mision.id_mision }}</p>
+			</div>
+		</div>
+		<div class="col-sm-8 col-lg-8 col-md-8">
+			<h5 class="title-company-dm">{{ mision.compania }}</h5>
+			<p class="subtitle-company-dm">Comienza {{ mision.fecha_inicio }} y termina el {{ mision.fecha_final }}</p>
+			<p class="info-dm-01-a">{{ mision.descrip }}</p>
+		</div>
+	</div>
+	{# 2 Area detalle de la misión #}
+	<div class="col-lg-4 col-md-12 col-sm-12 dm-area1-layout movil-med" >
+		<div class="col-lg-6 col-sm-12 col-md-12 dm-area2-col1 sm-area2-01">
+			<input type="hidden" class="coord-load" value="{{ mision.coord }}" data-paint="map-dm-mission-{{sec}}" autocomplete="off" />
+			<div class="hidden-map-movil"></div>
+			<div id="map-dm-mission-{{sec}}" class="map-definition" data-coord="{{ mision.coord }}" data-city="{{ mision.ciudad }}">
+	
+			</div>
+			<h6 class="subtitle-area2-dm">Coord {{ mision.coord }}</h6>
+		</div>
+		<div class="col-lg-6 col-md-12 col-sm-12 dm-area2-col2 sm-area2-02">
+			<h5 class="subtitle-area2-dm2">Objetivo General:</h5>
+			<p class="info-dm-01">{{ mision.objetivo }}</p>
+		</div>
+	</div>
+	{# 3 Area detalle de la misión #}
+	<div class="col-lg-4 col-md-12 col-sm-12 dm-info-mission-area3">
+		<div class="col-sm-6 col-lg-6 col-md-6 dm-area3-col1">
+			<h5 class="title-area3-dm">Tipo de Misión:</h5>
+			<p class="subtitle-area3-dm">{{mision.denominacion}}</p>
+			<p class="info-dm-02">{{mision.descripcion}}</p>
+			<span class="info-city-dm">{{ mision.ciudad }}</span>
+		</div>
+		{% if (typeButton=='action')%}
+		<div class="col-sm-6 col-lg-6 col-md-6 dm-area3-col2" data-id="{{ idMission }}" style="vertical-align:bottom;">
+			<div class="col-sm-6 col-lg-6 col-md-6" style="vertical-align:bottom;">
+				<a href="#" class="edit_mission"><span class="icon-dm icon-edit-dm"></span>EDITAR</a>
+			</div>
+			<div class="col-sm-6 col-lg-6 col-md-6" style="vertical-align:bottom;">
+				<a href="#" class="delete_mission"><span class="icon-dm icon-del-dm"></span>BORRAR</a>
+			</div>
+		</div>
+		{% endif %}
+		{% if (typeButton=='select')%}
+		<div class="col-sm-6 col-lg-6 col-md-6 dm-area3-col2" style="vertical-align:bottom;">
+			<div class="col-sm-6 col-lg-6 col-md-6" style="vertical-align:bottom;">
+				<a href="/planes/incluir/{{idMission}}" class="select_mission"><span class="icon-dm icon-edit-dm"></span>SELECCIONAR</a>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>

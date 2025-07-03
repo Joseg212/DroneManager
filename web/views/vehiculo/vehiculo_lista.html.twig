@@ -1,0 +1,91 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+  <!--<link href="/vendors/bower_components/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">-->
+
+{% endblock %}	
+
+{% block contentSnoopy %}
+
+	<!-- Row -->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group text-center">
+				<a href="/vehiculos/incluir" type="button" class="btn btn-dark btn-rounded" id="addRegister">Nuevo Vehículo</a>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="panel panel-default card-view panel-refresh">
+				<div class="refresh-container">
+					<div class="la-anim-1"></div>
+				</div>
+				<div class="panel-heading">
+					<div class="pull-left">
+						<h4 class="panel-title txt-dark">Tabla de Vehículo</h4>
+						<h5 class="panel-sub-title txt-dark">Lista de Vehículos ingresado al sistema</h5>
+					</div>
+					{#<div class="pull-right">
+						<a href="#" class="pull-left inline-block refresh">
+							<i class="zmdi zmdi-replay"></i>
+						</a>
+					</div>#}
+					<div class="clearfix"></div>
+				</div>
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearch" name="txtSearch" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblVehiculo" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Modelo</th>
+									<th>Matricula</th>
+									<th>Responsable</th>
+									<th>Opción</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div  id="newpPagins" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block footerScripts %}
+	 {{ parent() }}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/web/dinamic/js/prg_tow.js"></script>
+
+	<script type="text/javascript">
+		var stop_list = false;
+	</script>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prueba2" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d61c7425-8100-448d-b0cd-b1f64cecd009">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="IdCodigo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA['001']]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from drone]]>
+	</queryString>
+	<field name="id_drone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="modelo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="num_serie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_reg" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="204" y="21" width="147" height="15" uuid="4e2471ee-1354-40e0-8367-d7b96edb17d2"/>
+				<text><![CDATA[ME COMPLACE LA PRUEBA ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="63" width="100" height="16" uuid="fd86e2b1-4452-4ef5-89c9-cc8ec73bbddb"/>
+				<textFieldExpression><![CDATA[$P{IdCodigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="112" y="63" width="147" height="16" uuid="8770ad2c-09be-4633-b43b-2dbe5ce127bf"/>
+				<text><![CDATA[CODIGO ENVIADO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="12" y="0" width="100" height="14" uuid="427530b7-2a89-4085-b08a-367fd5d7c56d"/>
+				<textFieldExpression><![CDATA[$F{id_drone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="0" width="258" height="14" uuid="5e80cd80-778f-49ec-a946-089074e3df49"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,31 @@
+<div class="row screen-resoluction-2">
+	<div class="col-lg-4 col-md-12 col-sm-12" >
+		<div class="row">
+			<div class="col-lg-6 col-sm-12 col-md-12 color-dm-info-mission">
+				<p><strong>ID Piloto</strong> {{piloto.id_piloto}}</p>
+				<p>{{piloto.tipo}}</p>
+			</div>
+			<div class="col-lg-6 col-sm-12 col-md-12">
+				<p><strong>ID Usuario:</strong> {{piloto.id_usuario}}</p>
+				<p><strong>{{piloto.nombres}}</strong></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-12 col-sm-12">
+		<div class="row">
+			<div class="col-lg-6 col-sm-12 col-md-12">
+				<p><strong>ID Drone</strong> {{piloto.id_drone}}</p>
+				<p><strong>{{piloto.modelo}}</strong> </p>
+			</div>
+			<div class="col-lg-6 col-sm-12 col-md-12">
+				<p><strong>Labor a realizar:</strong></p>
+				<p>{{piloto.labor}} </p>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-12 col-sm-12 text-align-dm">
+		<div data-id="{{ idPiloto }}"> 
+			<a href="#" class="delete_itemPilot"><i class="zmdi zmdi-close-circle zmdi-hc-fw" style="color:#de8080; margin-left:1.2rem;font-size: 2.5rem;"></i></a>
+		</div>		
+	</div>
+</div>

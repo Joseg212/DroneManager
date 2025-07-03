@@ -1,0 +1,377 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/jvectormap/jvectormap.css" rel="stylesheet" type="text/css">
+
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/bower_components/hoteldaterangepicker/dist/css/hotel-datepicker.css" rel="stylesheet" type="text/css">
+
+
+{% endblock %}	
+
+{% block winModal_01 %}
+
+	<div class="win-modal-content">
+		<div class="row">
+			<h4 class="panel-title">SELECCIONAR</h4>
+			<h4 class="panel-title" style="font-size:1.1rem;color:#8cadca">CLIENTE</h4>
+			<div class="col-md-12 col-lg-12">
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm-client"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearchClient" name="txtSearchClient" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblCliente" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Compañia</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div  id="newpPaginsClient" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+						</div>
+						<div class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12 text-center">
+									<a href="#" class="btn btn-dark dm-close-all-01">Todos</a>
+									<a href="#" class="btn btn-dark dm-close-window-01">Retornar</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block winModal_02 %}
+
+	<div class="win-modal-content">
+		<div class="row">
+			<h4 class="panel-title">SELECCIONAR</h4>
+			<h4 class="panel-title"  style="font-size:1.1rem;color:#8cadca">USUARIO GESTOR</h4>
+			<div class="col-md-12 col-lg-12">
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm-typem"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearchUser" name="txtSearchUser" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblUsuario" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Usuario Gestor</th>
+									<th>Alias</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div id="newpPaginsUser" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4">
+						</div>
+						<div class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12 text-center">
+									<a href="#" class="btn btn-dark dm-close-all-02">Todos</a>
+									<a href="#" class="btn btn-dark dm-close-window-02">Retornar</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block contentSnoopy %}
+	<!-- Row -->
+	<div class="row">
+		<h4 style="margin-left:15px">Consultar Misiones Ingresadas</h4>
+		<h6 style="margin-bottom:20px;color:#747474;margin-left:15px;margin-top:10px">Puede realizar una consulta de todas las misiones ingresadas y el estatus de la misma.</h6>
+		
+		<div class="col-lg-4 col-md-12 col-sm-12">
+			<hr>
+			<div class="form-group label-floating is-focused">
+				<label for="fecha_inicio" class="control-label" >Indique fecha Inicio:</label>
+				<input type="date" name="fecha_inicio" id="fecha_inicio" autocomplete="off" class="form-control" value="" />
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-12  ">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button type="button" class="btn  btn-danger dm-button-search" id="search_client"><i class="fa fa-search"></i></button>
+				</span>									
+				<div class="form-group label-floating is-empty">
+					<label for="id_cliente" class="control-label">Identificación:</label>
+					<input type="text" id="id_cliente" name="id_cliente"  class="form-control" autocomplete="off"  readonly /> 
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-12">
+			<div class="form-group label-floating is-empty">
+				<label for="compania" class="control-label" >Nombre de Empresa:</label>
+				<input type="text" id="compania" name="compania" autocomplete="off" class="form-control" disabled /> 
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4 col-md-12 col-sm-12">
+			<div class="form-group label-floating is-focused">
+				<label for="fecha_final" class="control-label" >Indique fecha Final:</label>
+				<input type="date" name="fecha_final" id="fecha_final" autocomplete="off" class="form-control" value="" />
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-12  ">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button type="button" class="btn  btn-danger dm-button-search" id="search_user"><i class="fa fa-search"></i></button>
+				</span>									
+				<div class="form-group label-floating is-empty">
+					<label for="id_usuario" class="control-label">Identificación:</label>
+					<input type="text" id="id_usuario" name="id_usuario"  class="form-control" autocomplete="off"  readonly /> 
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-12">
+			<div class="form-group label-floating is-empty">
+				<label for="nombres" class="control-label" >Nombres:</label>
+				<input type="text" id="nombres" name="nombres" autocomplete="off" class="form-control" disabled /> 
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4 col-md-12 col-sm-12">
+			<div class="form-group label-floating selrole" >
+				<label for="roll" class="control-label">Estatus de la misión:</label>
+				<select class="form-control" id="estatus" name="estatus">
+					<option value="All">Todos</option>
+					<option value="Activo">Activo</option>
+					<option value="Planificado">Planificado</option>
+					<option value="Informado">Informado</option>
+					<option value="Finalizado">Finalizado</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-12 col-sm-12 text-right">
+				<a  class="btn btn-dark btn-rounded" id="processConsult" style="margin-top:1.9rem;">Procesar Consulta</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dm-gestion">
+           <div class="panel panel-default card-view panel-refresh">
+			{#<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearch" name="txtSearch" class="form-control" placeholder="Buscar">
+					</div>
+				</div>#}
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0" style="background:#000;">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblListaLogs" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>Registro Logs</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div  id="newpPagins" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block footerScripts %}
+	 {{ parent() }}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/vendors/jvectormap/jvectormap.min.js"></script>
+	<script src="/vendors/jvectormap/gdp-data.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-es-merc.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-europe-merc.js"></script>
+
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/fecha.min.js"></script>
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/hotel-datepicker.min.js"></script>
+	<script src="/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>	
+	
+	
+
+	<script type="text/javascript">
+		var stop_list = false;
+		var singlemap=null;
+
+	  	var d = new Date("2020-04-13T00:00:00.000+08:00");
+  		d.toLocaleString('en-US', { timeZone: 'Europe/Andorra' })
+
+		$.material.init();
+
+		var dt_LogSistema;
+
+		$(document).ready(function(){
+			listaLogs();
+		}); // document ready
+
+		function listaLogs() {
+			//var txtSearch = String($("#txtSearch").val());
+			var txtSearch = "";
+
+			var fecha_inicio = String($("#fecha_inicio").val());
+			var fecha_final = String($("#fecha_final").val());
+			var estatus = String($("#estatus").val());
+			var id_cliente = String($("#id_cliente").val());
+			var id_usuario = String($("#id_usuario").val());
+
+			//console.log("estatus" + estatus);
+
+
+			dt_LogSistema = $('#tblListaLogs').dataTable({
+					destroy:true,
+					serverSide: true,
+					searching: false,
+					lengthChange: false,
+					pageLength:50,
+					dom:'<"#myPagins"rp>',
+					language:{
+						info:"_PAGE_/_PAGES_ _MAX_",
+						infoEmpty:"1/1 1", 
+						infoFiltered:"",
+						paginate:{
+							first:"|<",
+							previous:"<<",
+							next:">>",
+							last:">|"
+						}
+					},
+					ajax:{
+						data:{'txtSearch':txtSearch,'fecha_inicio':fecha_inicio,'fecha_final':fecha_final,'estatus':estatus,'id_cliente':id_cliente,'id_usuario':id_usuario},
+						method:"POST",
+						dataType:"JSON",
+						url:'/ajax_process/initppal/viewLogs',
+						error: function(err, txt,thr){
+							console.log(err.responseText);
+							$.toast({
+								heading: 'DataTable',
+								text: 'Error al intentar recuperar la lista de datos',
+								position: 'top-right',
+								loaderBg:'#e6b034',
+								icon: 'error',
+								hideAfter: 3500, 
+								stack: 6
+							});
+
+							///$('body').html(err.responseText);
+						}, 
+						complete:function(){
+							 $("#newpPagins").html("");
+							 $("#myPagins").prependTo("#newpPagins");
+						}
+
+
+					},
+					columns:[
+						{data:"contenido"},
+					],
+					deferRender: true
+			 });	
+
+
+		}		
+	</script>
+	<style type="text/css">
+		input[type='text'] {
+			color:#747474;
+		}
+		select option {
+			color:#747474;
+		}
+		.form-control, .select2-container--default .select2-selection--single .select2-selection__rendered, .select2-container--default .select2-selection--single, .select2-selection.select2-selection--multiple, .wizard .content > .body input, .mce-floatpanel .mce-textbox, .mce-floatpanel .mce-btn, .dataTables_wrapper .dataTables_filter input, .dataTables_wrapper .dataTables_length select, .jsgrid-cell input, .jsgrid-cell select, .tablesaw-bar .btn-select select, .dd-handle, .dd3-content, .app-search .form-control:focus, .app-search .select2-container--default .select2-selection--single:focus, .select2-container--default .app-search .select2-selection--single:focus, .app-search .select2-selection.select2-selection--multiple:focus, .app-search .mce-floatpanel .mce-textbox:focus, .mce-floatpanel .app-search .mce-textbox:focus, .app-search .mce-floatpanel .mce-btn:focus, .mce-floatpanel .app-search .mce-btn:focus, .app-search .dataTables_wrapper .dataTables_filter input:focus, .dataTables_wrapper .dataTables_filter .app-search input:focus, .app-search .dataTables_wrapper .dataTables_length select:focus, .dataTables_wrapper .dataTables_length .app-search select:focus, .app-search .jsgrid-cell input:focus, .jsgrid-cell .app-search input:focus, .app-search .jsgrid-cell select:focus, .jsgrid-cell .app-search select:focus, .app-search .tablesaw-bar .btn-select select:focus, .tablesaw-bar .btn-select .app-search select:focus, .app-search .dd-handle:focus, .app-search .dd3-content:focus {
+			    color:#747474;
+		}		
+
+		table td p {
+			white-space: normal;
+			color:#b9b9b9 !important;
+		}
+
+		table td {
+			border-color:#b9b9b9 !important;
+		}
+		.paginate_button.page-item a {
+			background-color: #56bcb5 !important;
+		}
+
+		@media (max-width: 991px) {
+			.panel-default {
+				margin-left:-1.5rem;
+				margin-right:-1.5rem;
+			}
+			.row {
+			    margin-left: 0px;
+			    margin-right: 0px;
+			    padding-right: 0.5rem;
+			    padding-left: 0.5rem;
+			}
+		}
+
+	</style>
+
+{% endblock %}

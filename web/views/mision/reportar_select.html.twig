@@ -1,0 +1,143 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/jvectormap/jvectormap.css" rel="stylesheet" type="text/css">
+{% endblock %}	
+
+{% block contentSnoopy %}
+	<div id="link_new" class="link_new">
+		<p class="text-report-01">Para reportar el plan selección la misión planificada y luego llene los datos solicitados del mismo.</p>
+	</div>
+	<!-- Row -->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dm-gestion">
+           <div class="panel panel-default card-view panel-refresh">
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblPlanes" class="table table-hover mb-0" style="width:100%">
+								<tbody>
+								  <tr>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div  id="newpPagins" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block footerScripts %}
+	 {{ parent() }}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/vendors/jvectormap/jvectormap.min.js"></script>
+	<script src="/vendors/jvectormap/gdp-data.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-es-merc.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-europe-merc.js"></script>
+	
+	
+
+	<script type="text/javascript">
+		var stop_list = false;
+		var singlemap=null;
+		if ($("#link_new").length){
+
+			$("#link_new").prependTo("#arco-superior");
+		}
+
+		$(document).ready(function(){
+			listPains();
+		}); // document ready
+
+dt_Plains = null;
+function listPains() {
+	//var txtSearch = String($("#txtSearch").val());
+	var txtSearch = '';
+
+	dt_Plains = $('#tblPlanes').dataTable({
+			destroy:true,
+			serverSide: true,
+			searching: false,
+			lengthChange: false,
+			pageLength:15,
+			dom:'<"#myPagins"rp>',
+			language:{
+				info:"_PAGE_/_PAGES_ _MAX_",
+				infoEmpty:"1/1 1", 
+				infoFiltered:"",
+				paginate:{
+					first:"|<",
+					previous:"<<",
+					next:">>",
+					last:">|"
+				}
+			},
+			ajax:{
+				data:{'txtSearch':txtSearch},
+				method:"POST",
+				dataType:"JSON",
+				url:'/ajax_process/reportar/plainList',
+				error: function(err, txt,thr){
+					//console.log(err.responseText);
+					$.toast({
+						heading: 'DataTable',
+						text: 'Error al intentar recuperar la lista de datos',
+						position: 'top-right',
+						loaderBg:'#e6b034',
+						icon: 'error',
+						hideAfter: 3500, 
+						stack: 6
+					});
+
+					console.log(err.responseText);
+
+					///$('body').html(err.responseText);
+				}, 
+				complete:function(){
+					
+					$("#newpPagins").html("");
+					$("#myPagins").prependTo("#newpPagins");
+
+				}
+
+
+			},
+			columns:[
+				{data:"contenido"}
+			],
+			deferRender: true,
+			fnDrawCallback: function ( oSettings ) {
+	    		$(oSettings.nTHead).hide();
+			},
+	});	
+}
+
+	</script>
+	<style type="text/css">
+		a:hover {
+		    text-decoration: none;
+		    color: #116759;
+		}
+		.text-report-01{
+		    color: #116759;
+		}
+
+		#tblPlanes .icon-edit-dm {
+    		margin-left: 1rem;
+		}
+	</style>
+
+{% endblock %}

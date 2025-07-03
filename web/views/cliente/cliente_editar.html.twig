@@ -1,0 +1,127 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+  <!--<link href="/vendors/bower_components/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">-->
+
+{% endblock %}	
+
+{% block contentSnoopy %}
+	<!-- Row -->
+	<form action="/clientes/actualizar/{{idClient}}" method="post" autocomplete="off" name="frm_client" data-type="n11">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="panel panel-light card-view panel-refresh dronesmaritime-form-standar">
+				<div class="refresh-container">
+					<div class="la-anim-1"></div>
+				</div>
+				<div class="panel-heading">
+					<div class="pull-left">
+						<h4 class="txt-dark">EDITAR CLIENTE</h4>
+						<h5 class="panel-sub-title txt-dark">Permite modificar los datos de un cliente </h5>
+					</div>
+					{#<div class="pull-right">
+						<a href="#" class="pull-left inline-block refresh">
+							<i class="zmdi zmdi-replay"></i>
+						</a>
+					</div>#}
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body">
+						<div class="form-wrap">
+							<div class="row">
+								<div class="col-lg-6 col-md-12 ">
+									<div class="form-group label-floating">
+										<label for="compania" class="control-label">Compañia:</label>
+										<input type="text" id="compania" name="compania"  class="form-control" autocomplete="off" value="{{ cliente.compania }}" /> 
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="email" class="control-label" >Correo Electrónico:</label>
+										<input type="email" id="email" name="email" autocomplete="off" class="form-control"  value="{{ cliente.email }}"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-md-12">
+									<div class="form-group label-floating">
+										<label for="direccion" class="control-label">Dirección:</label>
+										<input type="text" id="direccion" name="direccion" autocomplete="off" class="form-control"  value="{{ cliente.direccion }}"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6 col-md-12 mt-30 mb-30">
+									<div class="form-group label-floating ">
+										<label for="rif_nit" class="control-label">RIF/NIT:</label>
+										<input type="text" id="rif_nit" name="rif_nit" autocomplete="off" class="form-control"  value="{{ cliente.rif_nit }}"/> 
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12 mt-30 mb-30">
+									<div class="form-group label-floating">
+										<label for="telf_cia" class="control-label">Teléfono:</label>
+										<input type="text" id="telf_cia" name="telf_cia" autocomplete="off" class="form-control"  value="{{ cliente.telf_cia }}" /> 
+									</div>
+								</div>
+							</div>
+							<div class="row"> 
+								<div class="col-lg-6 col-md-12 mt-30 mb-30">
+									<div class="form-group label-floating">
+										<label for="contacto" class="control-label">Contacto:</label>
+										<input type="text" id="contacto" name="contacto" autocomplete="off" class="form-control"  value="{{ cliente.contacto }}" /> 
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12 mt-30 mb-30">
+									<div class="form-group label-floating">
+										<label for="telf_contact" class="control-label">Teléfono:</label>
+										<input type="text" id="telf_contact" name="telf_contact" autocomplete="off" class="form-control"  value="{{ cliente.telf_contact }}" /> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+
+    </div>
+
+
+    <div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-dark btn-rounded" id="addRegister">Guardar</button>
+				<a href="/clientes"  class="btn btn-dark btn-rounded" id="addRegister">Cancelar</a>
+				<input type="hidden" name="token_id" value="{{ token_id }}" class="form-control" />
+			</div>
+		</div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block footerScripts %}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/web/dinamic/js/prg_client.js"></script>
+
+	<script type="text/javascript">
+		$.material.init();
+		var stop_list = true;
+		{% if (action_system=='display') %}
+		$.toast({
+			heading: 'Ocurrió un problema!!',
+			text: '{{ msgSystem }}',
+			position: 'top-right',
+			loaderBg:'#e6b034',
+			icon: 'error',
+			hideAfter: 3500, 
+			stack: 6
+		})
+		{% endif %}
+
+	</script>
+
+{% endblock %}

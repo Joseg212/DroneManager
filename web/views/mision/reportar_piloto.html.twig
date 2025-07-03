@@ -1,0 +1,112 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+  <!--<link href="/vendors/bower_components/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">-->
+
+{% endblock %}	
+
+{% block contentSnoopy %}
+	<!-- Row -->
+	<form action="/reportar/pilotoUpdate/{{idPiloto}}" method="post" autocomplete="off" name="frm_pilotoReporte" data-type="n11">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="panel panel-light card-view panel-refresh dronesmaritime-form-standar">
+				<div class="refresh-container">
+					<div class="la-anim-1"></div>
+				</div>
+				<div class="panel-heading">
+					<div class="pull-left">
+						<h4 class="panel-title txt-dark">REPORTAR MISIÓN POR PARTE DEL PILOTO</h4>
+						<h5 class="panel-sub-title txt-dark">Llene los siguiente datos para que pueda ir culminando la misión</h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body">
+						<div class="form-wrap">
+							<div class="row">
+								<div class="col-lg-4 col-md-12 col-sm-12">
+									<p><strong>Piloto: </strong>{{piloto.nombres}} <strong>ID:</strong>{{piloto.id_piloto}}<p>
+								</div>
+								<div class="col-lg-4 col-md-12 col-sm-12">
+									<p><strong>Plan: </strong>{{piloto.id_plan}} <strong>Drone:</strong>{{piloto.id_drone}} {{piloto.modelo}}<p>
+								</div>
+								<div class="col-lg-4 col-md-12 col-sm-12">
+									<p><strong>Tipo de Piloto: </strong>{{piloto.tipo}} <strong>Labor:</strong>{{piloto.labor}}<p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4 col-md-12 ">
+									<div class="form-group label-floating">
+										<label for="num_vuelo" class="control-label">Número de Vuelos:</label>
+										<input type="number" id="num_vuelo" name="num_vuelo"  class="form-control" autocomplete="off" value="{{piloto.num_vuelo}}" /> 
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="total_hrs" class="control-label" >Total Horas de Vuelo:</label>
+										<input type="number" id="total_hrs" name="total_hrs" autocomplete="off" class="form-control" value="{{piloto.total_hrs}}"/> 
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="hora_final" class="control-label" >Hora de Finalización:</label>
+										<input type="time" id="hora_final" name="hora_final" autocomplete="off" class="form-control" value="{{piloto.hora_final}}"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-md-12 ">
+									<div class="form-group label-floating">
+										<label for="observ_final" class="control-label">Observacion sobre el Trabajo:</label>
+										<input type="text" id="observ_final" name="observ_final"  class="form-control" autocomplete="off" value="{{piloto.observ_final}}" /> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+
+    </div>
+
+
+    <div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-dark btn-rounded" id="addRegister">Guardar</button>
+				<a href="/"  class="btn btn-dark btn-rounded" id="addRegister">Cancelar</a>
+				<input type="hidden" name="token_id" value="{{ token_id }}" class="form-control" />
+				<input type="hidden" name="idMision" value="{{ idMision }}" class="form-control" />
+ 			</div>
+		</div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block footerScripts %}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/web/dinamic/js/prg_drone.js"></script>
+
+	<script type="text/javascript">
+		$.material.init();
+		var stop_list = true;
+		{% if (action_system=='display') %}
+		$.toast({
+			heading: 'Ocurrió un problema!!',
+			text: '{{ msgSystem }}',
+			position: 'top-right',
+			loaderBg:'#e6b034',
+			icon: 'error',
+			hideAfter: 3500, 
+			stack: 6
+		})
+		{% endif %}
+
+	</script>
+
+{% endblock %}

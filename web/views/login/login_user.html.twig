@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>DronesMaritime</title>
+		<meta name="description" content="Sistema para controlar expediciones con drones" />
+		<meta name="keywords" content="drones, maritime,clientes" />
+		<meta name="author" content="hencework"/>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="web/dinamic/imagen/dm.ico">
+		<link rel="icon" href="/web/dinamic/imagen/dm.ico" type="image/x-icon">
+		
+		<!-- vector map CSS -->
+		<link href="vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css" rel="stylesheet" type="text/css"/>
+		
+		<!-- Custom CSS -->
+		<link href="web/dist/css/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body style="background-color:#000">
+		<!--Preloader-->
+		<div class="preloader-it">
+			<div class="la-anim-1"></div>
+		</div>
+		<!--/Preloader-->
+		
+		<div class="wrapper  pa-0">
+			<!--
+			<header class="sp-header">
+				<div class="sp-logo-wrap pull-left">
+					<a href="index.html">
+						<img class="brand-img mr-10" src="web/dinamic/imagen/logo.png" alt="brand"/>
+						<span class="brand-text">Snoopy</span>
+					</a>
+				</div>
+				<div class="form-group mb-0 pull-right">
+					<span class="inline-block pr-10">Don't have an account?</span>
+					<a class="inline-block btn btn-warning  btn-rounded btn-outline" href="signup.html">Sign Up</a>
+				</div>
+				<div class="clearfix"></div>
+			</header>
+			-->
+			
+			<!-- Main Content -->
+			<div class="page-wrapper pa-0 ma-0 auth-page">
+				<div class="container-fluid">
+					<!-- Row -->
+					<div class="table-struct full-width full-height" style="height:0px !important" >
+						<div class="table-cell vertical-align-middle auth-form-wrap" >
+							<div class="auth-form  ml-auto mr-auto no-float" style="background-color:#00173e; padding:1rem 1rem 1rem 1rem">
+								<div class="row"> 
+									<div class="col-sm-12 col-xs-12">
+										<div class="mb-30 logo-drones-maritime-icon">
+											<img src="web/dinamic/imagen/logos/only-icon.png">
+										</div>
+										<div class="mb-30 logo-drones-maritime-text">
+											<img src="web/dinamic/imagen/logos/text-logo.png">
+										</div>
+										<!--<div class="mb-30">
+											<h3 class="text-center txt-dark mb-10">Sign in to Snoopy</h3>
+											<h6 class="text-center nonecase-font txt-grey" style="color:#007b67 !important">Inicio Sesión en el Sistema</h6>
+										</div>	-->
+										<div class="form-wrap">
+											<form action="/validform" method="post" autocomplete="off" >
+												<div class="form-group">
+													<label class="control-label mb-10" for="nameUser">Nombre de Usuario:</label>
+													<input type="text" class="form-control" required="" id="nameUser" name="nameUser" placeholder="Ingrese usuario">
+													<input type="hidden" name="id_token" value="{{ id_section }}">
+												</div>
+												<div class="form-group">
+													<label class="pull-left control-label mb-10" for="passwUser">Contraseña</label>
+													<!--<a class="capitalize-font txt-orange block mb-10 pull-right font-12" href="forgot-password.html">forgot password ?</a>-->
+													<div class="clearfix"></div>
+													<input type="password" class="form-control" required="" id="passwUser" name="passwUser" placeholder="Ingrese contraseña">
+												</div>
+
+												<!--
+												<div class="form-group">
+													<div class="checkbox checkbox-primary pr-10 pull-left">
+														<input id="checkbox_2" required="" type="checkbox">
+														<label for="checkbox_2"> Keep me logged in</label>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												-->
+												<div class="form-group text-center">
+													<button type="submit" class="btn btn-warning  btn-rounded">iniciar sesión</button>
+												</div>
+ 												{% if (action_system=='alert') %}
+												<div class="alert alert-danger alert-dismissable alert-style-1">
+													<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+													<i class="zmdi zmdi-block"></i>{{ msgSystem }} 
+												</div>
+												{% endif %}
+											</form>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Row -->	
+				</div>
+				
+			</div>
+			<!-- /Main Content -->
+		
+		</div>
+		<!-- /#wrapper -->
+		
+		<!-- JavaScript -->
+		
+		<!-- jQuery -->
+		<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JavaScript -->
+		<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+		
+		<!-- Slimscroll JavaScript -->
+		<script src="web/dist/js/jquery.slimscroll.js"></script>
+		
+		<!-- Init JavaScript -->
+		<script src="web/dist/js/init.js"></script>
+	</body>
+</html>

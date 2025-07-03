@@ -1,0 +1,46 @@
+<div class="row screen-resoluction">
+	{# 1 Area detalle de la misión #}
+	<div class="col-lg-4 col-md-12 col-sm-12 color-dm-info-mission">
+		<div class="col-lg-4 col-sm-4 col-md-4">
+			<div class="content-imagen-dm">
+				<span class="icon-dm icon-person-2"></span>
+				<p class="text-center">{{ plan.id_mision }}</p>
+			</div>
+		</div>
+		<div class="col-sm-8 col-lg-8 col-md-8">
+			<h5 class="title-company-dm">{{ plan.compania }}</h5>
+			<p class="subtitle-company-dm">Inicio del Trabajo: {{ plan.fecha_comienzo }} - {{ plan.hora_comienzo }} </p>
+			<p class="info-dm-01-a">{{ plan.descrip }}</p>
+		</div>
+	</div>
+	{# 2 Area detalle de la misión #}
+	<div class="col-lg-4 col-md-12 col-sm-12 dm-area1-layout movil-med">
+		<div class="col-sm-6 col-lg-6 col-md-6 dm-area2-col1 sm-area2-01">
+			<h5 class="title-company-dm">Tipo de recopilación:</h5>
+			<p clsss="subtitle-company-dm"><strong style="font-weight:400">Tiempo aproximado: </strong>{{ plan.tiempo_hrs }}</p>
+			<p class="info-dm-01-a">{{ plan.tipo_recop }}</p>
+		</div>
+		<div class="col-sm-6 col-lg-6 col-md-6 dm-area2-col2 sm-area2-02">
+			<h5 class="subtitle-area2-dm2">Gestor Encargado:</h5>
+			<p class="info-dm-01">{{ plan.id_usuario }}-{{ plan.nombres }} </p>
+			<h5 class="subtitle-area2-dm2">Vehículo a Emplear:</h5>
+			<p class="info-dm-01">{{ plan.id_vehiculo }}-{{ plan.modelo }}</p>
+		</div>
+	</div>
+	{# 3 Area detalle de la misión #}
+	<div class="col-lg-4 col-md-12 col-sm-12 dm-info-mission-area3 movil-med-2">
+		<div class="col-sm-6 col-lg-6 col-md-6 dm-area3-col1">
+			<h5 class="title-area3-dm">Pilotos:</h5>
+			{% for fila in plan.pilotos %}
+			<p class="subtitle-area3-dm">{{fila.tipo }}-{{fila.nombres}}</p>
+			<p class="subtitle-area3-dm">Drone:{{fila.modelo}}</p>
+			{% endfor %}
+			<p class="subtitle-area3-dm">...</p>
+		</div>
+		<div class="col-sm-6 col-lg-6 col-md-6 dm-area3-col2" style="vertical-align:bottom;">
+			<div class="col-sm-12 col-lg-12 col-md-12" style="vertical-align:bottom;">
+				<a href="/reportar/selecionar/{{idMision}}" class="select_plain"><span class="icon-dm icon-edit-dm"></span>SELECCIONAR</a>
+			</div>
+		</div>
+	</div>
+</div>

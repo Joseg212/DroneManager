@@ -1,0 +1,568 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/jvectormap/jvectormap.css" rel="stylesheet" type="text/css">
+
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/bower_components/hoteldaterangepicker/dist/css/hotel-datepicker.css" rel="stylesheet" type="text/css">
+
+
+{% endblock %}	
+
+{% block contentSnoopy %}
+	<!-- Row -->
+	<h3>Consultando la misión ID:{{render.mision.id_mision}}</h3>
+	<h3>Estado Actual: {{render.mision.estatus}}</h3>
+	<h4 style="margin-bottom:20px;color:#747474;margin-top:10px">Esta misión fue planificada para el {{render.mision.fecha_inicio}} hasta el {{ render.mision.fecha_final }} </h4>
+	<hr>
+	<div class="row pandding-per1">
+		<div class="col-lg-8 col-md-12 col-sm-12">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<h5>INFORMACIÓN DEL CLIENTE</h5>
+					<p><strong>Compañia</strong></p>
+					<p>{{render.mision.compania }} <b>RIF:</b> {{ render.mision.rif_nit}}</p>
+					<p><b>Ubicada:</b> {{render.mision.direccion}}</p>
+					<p><b>Teléfono:</b> {{render.mision.telf_cia}} <b>e-mail:</b> {{ render.mision.email }}</p>
+				</div>
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<hr class="line-points-dm"/>
+					<p><strong>Contacto:</strong></p>
+					<p>{{ render.mision.contacto }} <b>Teléfono: </b>{{ render.mision.telf_contact }} </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<h5>DATOS DE LA MISIÓN</h5>
+					<p><strong>Descripción de la misión:</strong></p>
+					<p>{{render.mision.descrip}}</p>
+					<p><b>Ciudad:</b> {{render.mision.ciudad}}</p>
+				</div>
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<hr class="line-points-dm"/>
+					<p><strong>Objetivo General de la misión:</strong></p>
+					<p>{{render.mision.objetivo}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-12 col-sm-12">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 col-md-12">
+					<h5>UBICACIÓN:</h5>
+					<p><strong>Coordenadas GPS: {{render.mision.coord }}</strong></p>
+					<div class="imagen-map-md-top">
+					</div>
+					<div id="mapaUbic" class="imagen-map-md">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% if render.plan.id_plan is not empty %}
+	<section class="section-01 ss-style-triangles">
+	</section>
+	<div class="row area-02">
+		<h4>PLANIFICACIÓN DE LA MISIÓN</h4>
+		<hr style="border-color: #a1d6ce;">
+		<div class="col-lg-12 col-sm-12 col-md-12">
+			<div class="row">
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<p><strong class="strong-area-02">Usuario Gestor:</strong></p>
+					<p class="text-light-dm">{{render.plan.nombres}}</p>
+				</div>	
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<p><strong class="strong-area-02">Vehículo a emplear:</strong></p>
+					<p class="text-light-dm">{{render.plan.modelo}}</p>
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<p><strong class="strong-area-02">Breve descripción del plan:</strong></p>
+					<p class="text-light-dm">{{render.plan.descrip}}</p>
+				</div>	
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<p><strong class="strong-area-02">Tipos de recopilación de datos:</strong></p>
+					<p class="text-light-dm">{{render.plan.tipo_recop}}</p>
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<h5 class="subtitle-col-dm">TIEMPO CALCULADO</h5>
+					<p><strong class="strong-area-02">Fecha de Comienzo:</strong></p>
+					<p class="text-light-dm">{{render.plan.fecha_comienzo}}</p>
+				</div>	
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<hr class="line-points-dm-2"/>
+					<p><strong class="strong-area-02">Hora de Comienzo:</strong></p>
+					<p class="text-light-dm">{{render.plan.hora_comienzo}}</p>
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<hr class="line-points-dm-2"/>
+					<p><strong class="strong-area-02">Total horas aproximadas:</strong></p>
+					<p class="text-light-dm" style="margin-bottom:1.5rem;">{{render.plan.tiempo_hrs}}</p>
+				</div>
+			</div>
+		</div>
+		<hr class="separator-1">
+		<div class="col-lg-12 col-sm-12 col-md-12">
+			<h5 style="margin-bottom:2rem;">LISTA DE PILOTOS INCLUIDOS PARA LA MISIÓN</h5>
+			<div class="row">
+				<div class="col-lg-10 col-md-12 col-sm-12">
+					{% for fila in render.pilotos %}
+					<div class="row">
+						<div class="col-lg-2 col-md-12 col-sm-12">
+							<p><strong class="strong-area-02">ID Usuario:</strong></p>
+							<p class="text-light-dm">{{fila.id_usuario}}</p>
+						</div>
+						<div class="col-lg-4 col-md-12 col-sm-12">
+							<p><strong class="strong-area-02">Nombres:</strong></p>
+							<p class="text-light-dm">{{fila.nombres}}/{{fila.tipo}}</p>
+						</div>
+						<div class="col-lg-6 col-md-12 col-sm-12">
+							<p><strong class="strong-area-02">Labor:</strong></p>
+							<p class="text-light-dm">{{fila.labor}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-2 col-md-12 col-sm-12">
+						</div>
+						<div class="col-lg-4 col-md-12 col-sm-12">
+							<p class="text-light-dm">ID:{{fila.id_drone}}</p>
+						</div>
+						<div class="col-lg-6 col-md-12 col-sm-12">
+							<p class="text-light-dm">{{fila.modelo}}</p>
+						</div>
+					</div>					
+					{% endfor %}
+				</div>
+				<div class="col-lg-2 col-md-12 col-sm-12">
+				</div>
+			</div>
+		</div>		
+	</div>
+	<section class="section-02 ss-style-triangles-2">
+	</section>
+	{% endif %}
+	{% if not (render.plan.observg_final is empty) %}
+	<div class="row area-03">		
+		<div class="col-lg-12 col-sm-12 col-md-12">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 col-md-12">
+					<h4 style ="color:#3D4864;">REPORTE DE LA MISIÓN</h4>
+					<h5 style ="color:#3D4864;">La siguiente informaciòn fue reportada por los pilotos y el gestor de la misión.</h5>
+					<hr style="border-color:#3D4864"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 col-md-12">
+					<h5 class="margin-1rem-dm">INFORMACIÓN DEL GESTOR</h5>
+					<div class="row">
+						<div class="col-lg-6 col-sm-12 col-md-12">
+							<div class="box-gray-dm">
+								<p class="text-right"><strong>Finalizado: </strong> {{render.plan.fecha_final}}</p>
+								<p><strong>Observación Final: </strong>{{render.plan.observg_final}}</p>
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-12 col-md-12">
+							<div class="box-gray-dm">
+								<p><strong>Promedio de Números de vuelos realizados:</strong><span class="float-right">{{render.promdNumVuelos}}</span></p>
+								<p><strong>Promedio de Horas de vuelos realizados:</strong><span class="float-right">{{render.promdHrsVuelos}}</span></p>
+								<p><strong>Hora de Finalización Máxima:</strong><span class="float-right">{{render.horaMaxima}}</span></p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-lg-12 col-sm-12 col-md-12">
+					<h5 class="margin-1rem-dm">INFORMACIÓN DE LOS PILOTOS</h5>
+					<hr class="barra-separador-dm"/>
+					<div class="row" style="margin-left: -0.5rem;margin-right:-0.5rem">
+					{% for fila in render.pilotos %}
+						{% if fila.finalizado=='S' %}
+							<div class="col-lg-2 col-md-12 col-sm-12">
+								<div class="box-gray-dm-items">
+									<p style="font-size:1.4rem;color:#6c6c6c;"><strong>{{fila.nombres}}</strong></p>
+									<p><strong>Observación Piloto:</strong></p>
+									<p style="height:10rem;overflow:hidden">{{fila.observ_final}}</p>
+									<hr style="border-top: 4px solid #c5c5c5;">
+									<br>
+									<p><strong>Nro.Vuelos: </strong> {{fila.num_vuelo}}</p>
+									<p><strong>Total Horas: </strong> {{fila.total_hrs}}</p>
+									<p><strong>Finalizado: </strong> {{fila.hora_final}}</p>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+
+					</div>
+				</div>				
+			</div>
+			<div class="row" >
+				<div class="col-lg-12 col-sm-12 col-md-12">
+					<h5 class="margin-1rem-dm">ARCHIVOS SUBIDOS A GOOGLE DRIVE</h5>
+					<h6 class="margin-1rem-dm">La siguiente informaciòn fue reportada por los pilotos y el gestor de la misión.</h6>
+					<hr class="barra-separador-dm"/>
+					<div class="row" style="margin-left: -0.5rem;margin-right:-0.5rem">
+						<div class="col-lg-12 col-sm-12 col-md-12">
+							<div class="table-dm-cons"> 
+							  <table id="tblLstArchivo" class="table table-hover mb-0" style="width:100% !important">
+								<thead>
+								  <tr>
+									<th>Archivo</th>
+									<th>Extensión</th>
+									<th>Descripción</th>
+									<th>Tipo de Documento</th>
+									<th>Tamaño</th>
+									<th>Usuario</th>
+									<th>Subido</th>
+								</tr>
+								</thead>
+								<tbody>
+								  {% for fila in render.archivos %}
+									<tr>
+									<td><p>{{fila.name_file}}</p></td>
+									<td><p>{{fila.extension}}</p></td>
+									<td><p>{{fila.descrip_arch}}</p></td>
+									<td><p>{{fila.tipo_archivo}}</p></td>
+									<td><p class="text-center">{{fila.tamanio}} Mb</p></td>
+									<td><p>{{fila.nombres}}</p></td>
+									<td><p class="text-center"><strong style="color: #797878;">{{fila.fecha_subida}}</strong></p></td>
+									</tr>	
+								{% endfor %}
+								</tbody>
+							  </table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 col-sm-12 col-md-12">
+							<h5 class="text-right">TOTAL ARCHIVOS: {{render.total_arch}}</h5>
+							<h5 class="text-right">TOTAL MB USADOS: {{render.totalMegas}} Mb</h5>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="row">
+		<div class="col-lg-4 col-md-12 col-sm-12">
+		</div>
+		<div class="col-lg-4 col-md-12 col-sm-12 text-center">
+			<a  href="/consultas" class="btn btn-dark btn-rounded" style="margin-top:4rem;">Retornar</a>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block footerScripts %}
+	 {{ parent() }}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/vendors/jvectormap/jvectormap.min.js"></script>
+	<script src="/vendors/jvectormap/gdp-data.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-es-merc.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-europe-merc.js"></script>
+
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/fecha.min.js"></script>
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/hotel-datepicker.min.js"></script>
+	<script src="/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>	
+	
+	<script src="/web/dinamic/js/prg_consult.js"></script>
+	
+
+	<script type="text/javascript">
+		var stop_list = false;
+		var singlemap=null;
+
+	  	var d = new Date("2020-04-13T00:00:00.000+08:00");
+  		d.toLocaleString('en-US', { timeZone: 'Europe/Andorra' })
+
+		$.material.init();
+
+		$(document).ready(function(){
+			var gps = "{{render.mision.coord}}";
+			var city = "{{render.mision.ciudad}}";
+
+			var arrGps = gps.split(',');
+
+			//console.log(arrGps);
+
+			$("#mapaUbic").vectorMap({
+				map: 'es_merc',
+	  			backgroundColor: null,
+				color: '#eaeaea',
+				hoverOpacity: 0.7,
+				enableZoom: false,
+				zoomButtons : false,
+				showTooltip: true,
+				values: {gdpData},
+				scaleColors: ['#6FC6EA', '#0A4D70'],
+				normalizeFunction: 'polynomial',
+				markerStyle: {
+				      initial: {
+				        fill: '#F8E23B',
+				        stroke: '#383f47'
+				      },
+				      scale: {'1':'#10a28b'}
+				    },
+				regionStyle:{
+					initial:{fill:"#06b599"}
+				},
+				markers: [{latLng: [arrGps[0],arrGps[1]],name:city}],
+
+			});
+
+			var mapObj = $("#mapaUbic").vectorMap('get', 'mapObject');
+
+			var zoomSettings = {scale:3,lat:arrGps[0],lng:arrGps[1]};
+			mapObj.setFocus(zoomSettings);
+
+		}); // document ready
+	</script>
+	<style type="text/css">
+		input[type='text'] {
+			color:#747474;
+		}
+		select option {
+			color:#747474;
+		}
+		.form-control, .select2-container--default .select2-selection--single .select2-selection__rendered, .select2-container--default .select2-selection--single, .select2-selection.select2-selection--multiple, .wizard .content > .body input, .mce-floatpanel .mce-textbox, .mce-floatpanel .mce-btn, .dataTables_wrapper .dataTables_filter input, .dataTables_wrapper .dataTables_length select, .jsgrid-cell input, .jsgrid-cell select, .tablesaw-bar .btn-select select, .dd-handle, .dd3-content, .app-search .form-control:focus, .app-search .select2-container--default .select2-selection--single:focus, .select2-container--default .app-search .select2-selection--single:focus, .app-search .select2-selection.select2-selection--multiple:focus, .app-search .mce-floatpanel .mce-textbox:focus, .mce-floatpanel .app-search .mce-textbox:focus, .app-search .mce-floatpanel .mce-btn:focus, .mce-floatpanel .app-search .mce-btn:focus, .app-search .dataTables_wrapper .dataTables_filter input:focus, .dataTables_wrapper .dataTables_filter .app-search input:focus, .app-search .dataTables_wrapper .dataTables_length select:focus, .dataTables_wrapper .dataTables_length .app-search select:focus, .app-search .jsgrid-cell input:focus, .jsgrid-cell .app-search input:focus, .app-search .jsgrid-cell select:focus, .jsgrid-cell .app-search select:focus, .app-search .tablesaw-bar .btn-select select:focus, .tablesaw-bar .btn-select .app-search select:focus, .app-search .dd-handle:focus, .app-search .dd3-content:focus {
+			    color:#747474;
+		}		
+
+		table td p {
+			white-space: normal;
+			color:#b9b9b9 !important;
+		}
+		h5,h6 {
+		    color:#747474;
+		    margin-top:0.5rem;
+		    margin-bottom: 0.5rem;
+		}
+		.pandding-per1 {
+			padding-left: 2.1rem;
+			padding-right: 2.1rem;
+		}
+		b {
+			font-weight: 500;
+		}
+		table td {
+			border-color:#b9b9b9 !important;
+		}
+		.paginate_button.page-item a {
+			background-color: #56bcb5 !important;
+		}
+		.imagen-map-md {
+			width:100%;
+			height: 190px;
+		}
+		.imagen-map-md-top {
+			width:100%;
+			height: 190px;
+			position: absolute;
+			z-index: 100;
+			background-color: rgba(0,0,0,0.05);
+		}
+
+		.box-gray-dm {
+		    padding: 2rem 2rem;
+		    border-radius: 1rem 1rem;
+		    background-color: #CDCFD1;
+		    border: solid 1px #79695C;
+		    height: 12rem;
+		    margin-left: 1rem;
+		    margin-right: 1rem;
+		}
+
+		.box-gray-dm-items{
+		    padding: 1rem 1rem;
+		    border-radius: 1rem 1rem;
+		    background-color: #CDCFD1;
+		    border: solid 1px #79695C;
+		    margin-bottom: 1rem;
+		}
+
+		.barra-separador-dm{
+			border-style: dotted;
+			border-color: #CBCDD2;
+			margin-bottom: 1.2rem;
+		}
+
+
+		.table-dm-cons tr th{
+			background-color: #4C4C4C;
+			color:#B4B4B4;
+		}
+		.table-dm-cons .table {
+		    border-bottom: solid 2px #3c3c3c;
+		    border-bottom-color: #b7b7b7 !important;
+		    border-bottom-style: dotted;
+		}
+		@media (max-width: 991px) {
+			.panel-default {
+				margin-left:-1.5rem;
+				margin-right:-1.5rem;
+			}
+			.row {
+			    margin-left: 0px;
+			    margin-right: 0px;
+			    padding-right: 0.5rem;
+			    padding-left: 0.5rem;
+			}
+			.box-gray-dm {
+			    padding: 1rem 1rem;
+			    border-radius: 1rem 1rem;
+			    background-color: #CDCFD1;
+			    border: solid 1px #79695C;
+			    height: 12rem;
+			    margin-left: -0.5rem;
+			    margin-right: -0.5rem;
+			    margin-bottom: 1rem;
+			}
+			.table-dm-cons {
+				overflow: scroll;
+			}
+
+		}
+
+
+
+		/* Triangles */
+		.section-01 {
+		    position: relative;
+		    padding: 0.5rem;
+		    background: #fbfbfb;
+		    color: #fbfbfb;
+		    margin-left: -15px;
+		    margin-right: -15px;
+		    height: 50px;
+		}
+		.section-01::before, .section-01::after {
+    		position: absolute;
+    		content: '';
+    		pointer-events: none;
+		}
+
+
+		.ss-style-triangles::before,
+		.ss-style-triangles::after {
+			left: 50%;
+			width: 60px;
+			height: 60px;
+			-webkit-transform: translateX(-50%) rotate(45deg);
+			transform: translateX(-50%) rotate(45deg);
+		}
+
+		.ss-style-triangles::before {
+			top: 30px;
+			background:transparent;
+		}
+
+		.ss-style-triangles::after {
+			bottom: -30px;
+			z-index: 10;
+			background: inherit;
+		}
+		/* Triangles */
+		.section-02 {
+		    position: relative;
+		    padding: 0.5rem;
+		    background: #c1eae4;
+		    color: #fbfbfb;
+		    margin-left: -15px;
+		    margin-right: -15px;
+		    height: 50px;
+		}
+		.section-02::before, .section-02::after {
+    		position: absolute;
+    		content: '';
+    		pointer-events: none;
+		}
+
+		.ss-style-triangles-2::before,
+		.ss-style-triangles-2::after {
+			left: 50%;
+			width: 60px;
+			height: 60px;
+			-webkit-transform: translateX(-50%) rotate(45deg);
+			transform: translateX(-50%) rotate(45deg);
+		}
+
+		.ss-style-triangles-2::before {
+			top: 10px;
+			z-index: 10;
+			background: #c1eae4;
+		}
+
+		.ss-style-triangles-2::after {
+			bottom: -30px;
+			z-index: 10;
+			background: inherit;
+		}
+
+		.area-02 {
+    		background: #c1eae4;
+    		padding-top: 5rem;
+    		padding-left: 1rem;
+    		padding-right: 1rem;
+		}
+		.area-03 {
+    		background: #D9D9D9;
+    		padding-top: 5rem;
+    		padding-left: 1rem;
+    		padding-right: 1rem;
+		}
+		.area-03 p {
+			color:#4D4D4E !important;
+		}
+		.line-points-dm {
+		    border-style: dashed;
+		    border-color: #eeeeee;
+		    border-width: 1px;
+		    margin-bottom: 1.5rem;
+		    margin-top: 1.2rem;
+		}
+		.strong-area-02 {
+		    font-weight: 600;
+		    color: #2e7e72;
+		}
+		.text-light-dm {
+		    color: #2e7e72;
+		}
+		.subtitle-col-dm {
+		    color: #2e7e72;
+		}
+		.line-points-dm-2 {
+		    border-style: dashed;			
+			border-color: #b6e1da;
+		    border-width: 1px;
+		    margin-bottom: 1.5rem;
+		    margin-top: 1.2rem;
+		}
+		.separator-1 {
+		    border-color: #a1d6ce;
+		    display: block;
+		    clear: left;
+		    margin-bottom: 1rem;
+		}
+		.margin-1rem-dm {
+			margin-left: 1rem;
+		}
+		.float-right {
+			float:right;
+			clear:right;
+		}
+
+	</style>
+
+{% endblock %}

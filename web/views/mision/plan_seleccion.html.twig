@@ -1,0 +1,73 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/jvectormap/jvectormap.css" rel="stylesheet" type="text/css">
+{% endblock %}	
+
+{% block contentSnoopy %}
+	<div id="link_new" class="link_new">
+		<p>Seleccione la misión a la desea ingresar los planes.</p>
+	</div>
+	<!-- Row -->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dm-gestion">
+           <div class="panel panel-default card-view panel-refresh">
+			{#<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearch" name="txtSearch" class="form-control" placeholder="Buscar">
+					</div>
+				</div>#}
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblSelMision" class="table table-hover mb-0" style="width:100%">
+								<tbody>
+								  <tr>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div  id="newpPagins" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block footerScripts %}
+	 {{ parent() }}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/vendors/jvectormap/jvectormap.min.js"></script>
+	<script src="/vendors/jvectormap/gdp-data.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-es-merc.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-europe-merc.js"></script>
+	
+	<script src="/web/dinamic/js/prg_mission.js"></script>
+	
+
+	<script type="text/javascript">
+		var stop_list = false;
+		var singlemap=null;
+
+
+		var tablaPlainSelec=null;
+
+		$(document).ready(function(){
+			listSelMission();
+		}); // document ready
+	</script>
+
+{% endblock %}

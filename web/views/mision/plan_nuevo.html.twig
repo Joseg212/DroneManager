@@ -1,0 +1,561 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+	<link href="/web/dist/css/style-dm.css" rel="stylesheet" type="text/css">
+	<link href="/vendors/bower_components/hoteldaterangepicker/dist/css/hotel-datepicker.css" rel="stylesheet" type="text/css">
+  <!--<link href="/vendors/bower_components/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">-->
+
+{% endblock %}	
+
+{# Ventanas modales para seleccionar el cliente y el tipo de misión #}
+{% block winModal_01 %}
+
+	<div class="win-modal-content">
+		<div class="row">
+			<h4 class="panel-title">SELECCIONAR</h4>
+			<h4 class="panel-title" style="font-size:1.1rem;color:#8cadca">VEHÍCULO</h4>
+			<div class="col-md-12 col-lg-12">
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm-client"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearchVehiculo" name="txtSearchVehiculo" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblVehiculo" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Modelo</th>
+									<th>Matricula</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div  id="newpPaginsTow" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+						</div>
+						<div class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12 text-center">
+									<a href="#" class="btn btn-dark dm-close-window-01">Retornar</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block winModal_02 %}
+
+	<div class="win-modal-content">
+		<div class="row">
+			<h4 class="panel-title">SELECCIONAR</h4>
+			<h4 class="panel-title"  style="font-size:1.1rem;color:#8cadca">USUARIO GESTOR</h4>
+			<div class="col-md-12 col-lg-12">
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm-typem"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearchUser" name="txtSearchUser" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblUsuario" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Usuario Gestor</th>
+									<th>Alias</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div id="newpPaginsUser" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4">
+						</div>
+						<div class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12 text-center">
+									<a href="#" class="btn btn-dark dm-close-window-02">Retornar</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block winModal_03 %}
+
+	<div class="win-modal-content">
+		<div class="row">
+			<h4 class="panel-title">SELECCIONAR</h4>
+			<h4 class="panel-title"  style="font-size:1.1rem;color:#8cadca">DRONE PARA LA MISIÓN</h4>
+			<div class="col-md-12 col-lg-12">
+				<div class="form-group mb-0">
+					<div class="input-group mb-15 search-dronem-01"> <span class="input-group-btn">
+						<button type="button" class="btn  btn-danger btn-search-dm-typem"><i class="fa fa-search"></i></button>
+						</span>
+						<input type="text" id="txtSearchDrone" name="txtSearchDrone" class="form-control" placeholder="Buscar">
+					</div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body row pa-0">
+						<div class="table-wrap">
+							<div class="table-responsive">
+							  <table id="tblDrone" class="table table-hover mb-0" style="width:100%">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>Modelo</th>
+									<th>Serie</th>
+								</tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								  </tr>	
+								</tbody>
+							  </table>
+							</div>
+
+						</div>
+						<div id="newpPaginsDrone" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4">
+						</div>
+						<div class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12">
+								</div>
+								<div class="col-lg-3 col-md-12 text-center">
+									<a href="#" class="btn btn-dark dm-close-window-03">Retornar</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+
+{% block contentSnoopy %}
+	<!--Row de Información -->
+	<div class="row modo-large-md" style="margin-top:4rem;text-align:right" >
+	 	<div class="col-lg-12 col-sm-12">
+			<h4 class="info-md-title-inwhite">Información de la misión</h4>	 	
+			<p class="info-md-p-inwhite"><strong>ID:</strong>{{mision.id_mision}}</p>
+			<p class="info-md-p-inwhite" style="margin-top:1rem;">Comienza {{ mision.fecha_inicio }} y termina el {{ mision.fecha_final }}</p>
+			<div class="skew-c">
+			</div>
+			<div class="colour-block" style="width:100%;">
+				<h4 class="info-md-title-inwhite" style="color:#a6aacf">Datos del cliente</h4>	 	
+				<div class="row sm-space" >
+					<div class="col-lg-3 col-sm-12">
+						<p><strong>Cliente:</strong> {{ mision.compania }} </p>
+						<p><strong>Teléfono:</strong> {{ mision.telf_cia}}</p>
+					</div>
+					<div class="col-lg-6 col-sm-12">
+						<p><strong>Dirección:</strong> {{ mision.direccion }} </p>
+						<p><strong>Contacto :</strong> {{ mision.contacto}}   </p>
+					</div>				
+					<div class="col-lg-3 col-sm-12">
+						<p><strong>Teléfono Contacto:</strong> {{ mision.telf_contact }}</p>
+						<p><strong>Correo Electrónico :</strong> {{ mision.email}} </p>
+					</div>				
+				</div>
+				<div class="row sm-space">
+					<div class="col-lg-6 col-sm-12">
+						<h4 class="info-md-title-inwhite" style="color:#a6aacf">Ubicación de Misión</h4>
+						<div class="row sm-space">
+							<div class="col-lg-4 col-sm-12">
+								<p><strong>Coordenadas GPS:</strong></p>
+								<p>{{ mision.coord }} </p>
+								<br>
+								<br>
+								<p><strong>Ciudad:</strong>{{ mision.ciudad }}</p>
+							</div>
+							<div class="col-lg-8 col-sm-12">
+								<div class="map-display-coat"></div>
+								<div id="mapMission" class="map-display-mission"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-12">
+						<h4 class="info-md-title-inwhite" style="color:#a6aacf">Información Técnica</h4>
+						<div class="row sm-space">
+							<div class="col-lg-6 col-sm-12">
+								<p><strong>Descripción:</strong></p>
+								<p>{{ mision.descrip }}</p>
+							</div>
+							<div class="col-lg-6 col-sm-12">
+								<p><strong>Objetivo General:</strong></p>
+								<p>{{ mision.objetivo }}</p>
+							</div>
+							<div class="col-lg-6 col-sm-12">
+								<p><strong>Tipo Misión: </strong>{{ mision.denominacion }}</p>
+								<p><strong>Descripción: </strong>{{ mision.descripcion }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="skew-cc">
+			</div>
+	 	</div>
+	</div>
+	<!-- Row -->
+	<form action="/planes/salvar/{{idMission}}" method="post" autocomplete="off" name="frm_plainMission" data-type="n01">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="panel panel-light card-view panel-refresh dronesmaritime-form-standar">
+				<div class="refresh-container">
+					<div class="la-anim-1"></div>
+				</div>
+				<div class="panel-heading">
+					<div class="pull-left">
+						<h4 class="txt-dark">PLAN DE MISIÓN NUEVA</h4>
+						<h5 class="panel-sub-title txt-dark">Defina el plan que se va realizar en la misión y los pilotos que realizaran los controles del Drone.</h5>
+					</div>
+					{#<div class="pull-right">
+						<a href="#" class="pull-left inline-block refresh">
+							<i class="zmdi zmdi-replay"></i>
+						</a>
+					</div>#}
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body">
+						<div class="form-wrap">
+							<div class="row">
+								<h5 class="panel-title txt-dark dm-caption-text">Datos informativos del Plan</h5>
+								<div class="col-lg-2 col-md-12  ">
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button type="button" class="btn  btn-danger dm-button-search" id="search_tow"><i class="fa fa-search"></i></button>
+										</span>									
+										<div class="form-group label-floating is-empty">
+											<label for="id_vehiculo" class="control-label">Identificación:</label>
+											<input type="text" id="id_vehiculo" name="id_vehiculo"  class="form-control" autocomplete="off"  readonly /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating is-empty">
+										<label for="modelo" class="control-label" >Vehículo seleccionado::</label>
+										<input type="text" id="modelo" name="modelo" autocomplete="off" class="form-control" disabled /> 
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-12  ">
+									<div class="input-group">
+									{% if (usuario.role=='Administrador') %}
+										<span class="input-group-btn">
+											<button type="button" class="btn  btn-danger dm-button-search" id="search_gestor"><i class="fa fa-search"></i></button>
+										</span>
+									{% endif %}	
+										<div class="form-group label-floating">
+											<label for="id_usuario" class="control-label">Identificación:</label>
+											<input type="text" id="id_usuario" name="id_usuario"  class="form-control" autocomplete="off"  value="{{ usuario.id_usuario }}" readonly /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="input-group">
+										<div class="form-group label-floating">
+											<label for="nombres" class="control-label" >Gestor de la Misión:</label>
+											<input type="text" id="nombres" name="nombres" autocomplete="off" class="form-control" value="{{ usuario.nombres }}" disabled /> 
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr/>
+							<div class="row">
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating is-focused">
+										<label for="fecha_comienzo" class="control-label" >Fecha de Comienzo:</label>
+										<input type="date" id="fecha_comienzo" name="fecha_comienzo" autocomplete="off" class="form-control" value=""/> 
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating is-focused">
+										<label for="hora_comienzo" class="control-label" >Hora en comenzara:</label>
+										<input type="time" id="hora_comienzo" name="hora_comienzo" autocomplete="off" class="form-control"/> 
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="tiempo_hrs" class="control-label" >Horas estimadas:</label>
+										<input type="number" id="tiempo_hrs"  name="tiempo_hrs" autocomplete="off" class="form-control" maxlength="4" /> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="tipo_recop" class="control-label" >Tipo de recolección de datos:</label>
+										<input type="text" name="tipo_recop" id="tipo_recop" autocomplete="off" class="form-control" maxlength="180" value="{{ fechaRango }}" />
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating is-empty">
+										<label for="descrip" class="control-label" >Una breve descripción del plan:</label>
+										<input type="text" name="descrip" id="descrip" autocomplete="off" class="form-control" value="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row items-row">
+							<h5 class="panel-title txt-dark dm-caption-text">Pilotos que se integran en la Misión</h5>
+							<div class="row">
+								<div class="col-lg-2 col-md-12  ">
+									<div class="input-group" style="width:100%">
+										<span class="input-group-btn">
+											<button type="button" class="btn  btn-danger dm-button-search" id="search_piloto" style="margin-left: -15px;margin-top: 33px !important;"><i class="fa fa-search"></i></button>
+										</span>
+										<div class="form-group label-floating">
+											<label for="idPiloto" class="control-label">Identificación:</label>
+											<input type="text" id="idPiloto" name="idPiloto"  class="form-control" autocomplete="off"  value="" readonly /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="input-group" style="width:100%">
+										<div class="form-group label-floating">
+											<label for="nombrePiloto" class="control-label" >Piloto:</label>
+											<input type="text" id="nombrePiloto" name="nombrePiloto" autocomplete="off" class="form-control" value="" disabled /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-12  ">
+									<div class="input-group" style="width:100%">
+										<span class="input-group-btn">
+											<button type="button" class="btn  btn-danger dm-button-search" id="search_drone"><i class="fa fa-search"></i></button>
+										</span>
+										<div class="form-group label-floating">
+											<label for="id_drone" class="control-label">Identificación:</label>
+											<input type="text" id="id_drone" name="id_drone"  class="form-control" autocomplete="off"  value="" readonly /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="input-group" style="width:100%">
+										<div class="form-group label-floating">
+											<label for="modeloDrone" class="control-label" >Drone:</label>
+											<input type="text" id="modeloDrone" name="modeloDrone" autocomplete="off" class="form-control" value="" disabled /> 
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6 col-md-12" >
+									<div class="input-group" style="width:100%">
+										<div class="form-group label-floating">
+											<label for="labor" class="control-label">Labor a Realizar:</label>
+											<input type="text" id="labor" name="labor" autocomplete="off" class="form-control" value="" /> 
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12" style="text-align:right">
+									<div class="input-group" style="width:100%">
+										<div class="form-group label-floating">
+											<button type="button" class="btn btn-dark" id="addPilot">Anexar Piloto</button>
+											<input type="hidden" name="tmp_id" id="tmp_id" value="{{ tmp_id }}" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row items-row-single">
+							<table id="tblPilotos" class="table table-hover mb-0" style="width:100%">
+							<tbody>
+							  <tr>
+								<td></td>
+							  </tr>	
+							</tbody>
+							</table>
+						</div>
+						<div class="row items-row-single">
+							<div  id="newpPaginsItemPilot" class="dataTables_wrapper dt-bootstrap4 no-footer pb-4" >
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+
+    </div>
+
+
+    <div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-dark btn-rounded" id="addPlainMision">Guardar</button>
+				<a href="/planes"  class="btn btn-dark btn-rounded" id="addRegister">Cancelar</a>
+				<input type="hidden" id="token_id" name="token_id" value="{{ token_id }}" class="form-control" />
+			</div>
+		</div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block footerScripts %}
+
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/fecha.min.js"></script>
+	<script src="/vendors/bower_components/hoteldaterangepicker/dist/js/hotel-datepicker.min.js"></script>
+
+	<script src="/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+
+	<script src="/vendors/jvectormap/jvectormap.min.js"></script>
+	<script src="/vendors/jvectormap/gdp-data.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-es-merc.js"></script>
+	<script src="/vendors/jvectormap/jquery-jvectormap-europe-merc.js"></script>
+
+	<script src="/web/dinamic/js/prg_mission.js"></script>
+
+	<script type="text/javascript">
+	  	var d = new Date("2020-04-13T00:00:00.000+08:00");
+  		d.toLocaleString('en-US', { timeZone: 'Europe/Andorra' })
+
+		$.material.init();
+		var stop_list = true;
+		{% if (action_system=='display') %}
+		$.toast({
+			heading: 'Ocurrió un problema!!',
+			text: '{{ msgSystem }}',
+			position: 'top-right',
+			loaderBg:'#e6b034',
+			icon: 'error',
+			hideAfter: 3500, 
+			stack: 6
+		})
+		{% endif %}
+
+		var rango_fecha=null;
+
+
+		$(document).ready(function(event){
+
+			// var input = document.getElementById('rango_fecha');
+			// rango_fecha = new HotelDatepicker(input);
+			// rango_fecha.format = "DD/MM/YYYY";
+			// rango_fecha.separator = " - ";
+
+			var latitud  = '{{ mision.lat }}';
+			var longitud = '{{ mision.long }}';
+			var city 	 = '{{ mision.ciudad }}';
+
+
+			//console.log(arrGps);
+
+			$("#mapMission").vectorMap({
+				map: 'es_merc',
+	  			backgroundColor: null,
+				color: '#eaeaea',
+				hoverOpacity: 0.7,
+				enableZoom: false,
+				zoomButtons : false,
+				showTooltip: true,
+				height:'350px',
+				values: {gdpData},
+				scaleColors: ['#6FC6EA', '#0A4D70'],
+				normalizeFunction: 'polynomial',
+				markerStyle: {
+				      initial: {
+				        fill: '#F8E23B',
+				        stroke: '#383f47'
+				      },
+				      scale: {'1':'#10a28b'}
+				    },
+				regionStyle:{
+					initial:{fill:"#06b599"}
+				},
+				markers: [{latLng: [latitud,longitud],name:city}],
+
+			});
+
+			var mapObj = $("#mapMission").vectorMap('get', 'mapObject');
+
+			var zoomSettings = {scale:2,lat:latitud,lng:longitud, cx:300,cy:300};
+			mapObj.setFocus(zoomSettings);
+		}); // fin de document ready
+
+	</script>
+
+	<style type="text/css">
+		.container-fluid {
+    		padding-right: 15px !important;
+    		padding-left: 15px !important;
+		}
+		.pagination {
+			background: #56bcb5 !important;
+		}
+		strong {
+    		font-weight: 600;
+    		color: #6f6f6f;
+		}	
+		.color-dm-info-mission {
+	    	margin-left: 0px;
+		}
+		.text-align-dm {
+			text-align: right;
+		}	
+		@media (max-width: 991px) {
+			.items-row-single {
+				padding-right: 0rem;
+				padding-left: 0rem;
+			}
+			.text-align-dm {
+				text-align: center;
+			}
+		}
+
+	</style>
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends "template/base1.html.twig" %}
+
+{#{ include('template/base1.html.twig') }#}
+
+{% block  headerScripts %}
+  <!--<link href="/vendors/bower_components/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">-->
+
+{% endblock %}	
+
+{% block contentSnoopy %}
+	<!-- Row -->
+	<form action="/usuarios/actualizar/{{ idUser }}" method="post" autocomplete="off" name="frm_user" data-type="n11">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="panel panel-light card-view panel-refresh dronesmaritime-form-standar">
+				<div class="refresh-container">
+					<div class="la-anim-1"></div>
+				</div>
+				<div class="panel-heading">
+					<div class="pull-left">
+						<h4 class="panel-title txt-dark">USUARIO EDICIÓN</h4>
+						<h5 class="panel-sub-title txt-dark">Modificar información existente del usuario</h5>
+					</div>
+					{#<div class="pull-right">
+						<a href="#" class="pull-left inline-block refresh">
+							<i class="zmdi zmdi-replay"></i>
+						</a>
+					</div>#}
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body">
+						<div class="form-wrap">
+							<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="nombres" class="control-label">Id Usuario:</label>
+										<input type="text" id="nombres" name="nombres"  class="form-control" autocomplete="off" value="{{ usuario.id_usuario }}" readonly /> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6 col-md-12 ">
+									<div class="form-group label-floating">
+										<label for="nombres" class="control-label">Nombre:</label>
+										<input type="text" id="nombres" name="nombres"  class="form-control" autocomplete="off" value="{{ usuario.nombres }}"/> 
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="email" class="control-label" >Correo Electrónico:</label>
+										<input type="email" id="email" name="email" autocomplete="off" class="form-control" value="{{ usuario.email }}"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="cargo" class="control-label">Cargo:</label>
+										<input type="text" id="cargo" name="cargo" autocomplete="off" class="form-control" value="{{ usuario.cargo }}"/> 
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12">
+									<div class="form-group label-floating">
+										<label for="telfm"class="control-label">Teléfono Movíl:</label>
+										<input type="texto" id="telfm" name="telfm" autocomplete="off" class="form-control" value="{{ usuario.telf_movil }}"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6 col-md-12 mt-30 mb-30">
+									<div class="form-group label-floating selrole" >
+										<label for="roll" class="control-label">Roll de Usuario:</label>
+										<select class="form-control" id="roll" name="roll">
+											<option value="nulo">Escoger</option>
+											<option value="Piloto">Piloto</option>
+											<option value="Gestor">Gestor</option>
+											<option value="Administrador">Administrador</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+
+    </div>
+    {# Para el area de la contraseña #}
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="panel panel-light card-view panel-refresh dronesmaritime-form-standar">
+				<div class="refresh-container">
+					<div class="la-anim-1"></div>
+				</div>
+				<div class="panel-heading">
+					<div class="pull-left">
+						<h6 class="panel-title txt-dark">IDENTIFICACIÓN</h6>
+						<h5 class="panel-sub-title txt-dark">Solo puede cambiar la contraseña del usuario en el caso de que sea escrita</h5>
+					</div>
+					{#<div class="pull-right">
+						<a href="#" class="pull-left inline-block refresh">
+							<i class="zmdi zmdi-replay"></i>
+						</a>
+					</div>#}
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-wrapper collapse in">
+					<div  class="panel-body">
+						<div class="form-wrap">
+							<div class="row">
+								<div class="col-lg-4 col-md-12 ">
+									<div class="form-group label-floating">
+										<label for="userName" class="control-label">Usuario:</label>
+										<input type="text" id="userName" name="userName" class="form-control" autocomplete="off" readonly value="{{ usuario.user }}" /> 
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating">
+										<label for="userPassw" class="control-label" >Contraseña:</label>
+										<input type="password" id="userPassw" name="userPassw" autocomplete="off" class="form-control"/> 
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<div class="form-group label-floating is-empty">
+										<label for="userPassw2" class="control-label" >Confimar Contraseña:</label>
+										<input type="password" id="userPassw2" name="userPassw2" autocomplete="off" class="form-control"/> 
+									</div>
+								</div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>    
+		</div>
+	</div>
+
+    <div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-dark btn-rounded" id="addRegister">Guardar</button>
+				<a href="/usuarios"  class="btn btn-dark btn-rounded" id="addRegister">Cancelar</a>
+				<input type="hidden" name="token_id" value="{{ token_id }}" class="form-control" />
+			</div>
+		</div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block footerScripts %}
+	<!--<script src="/vendors/bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>-->
+	<script src="/web/dinamic/js/prg_user.js"></script>
+
+	<script type="text/javascript">
+		$.material.init();
+		var stop_list = true;
+		{% if (action_system=='display') %}
+		$.toast({
+			heading: 'Ocurrió un problema!!',
+			text: '{{ msgSystem }}',
+			position: 'top-right',
+			loaderBg:'#e6b034',
+			icon: 'error',
+			hideAfter: 3500, 
+			stack: 6
+		})
+		{% endif %}
+		
+		$("div.selrole select").val("{{ usuario.role }}");
+	</script>
+
+{% endblock %}
