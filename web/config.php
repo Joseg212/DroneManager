@@ -17,7 +17,7 @@ define('FS_HIDDEN_PLUGINS', '');
 define('FS_DEBUG', false);
 define('FS_DISABLE_ADD_PLUGINS', false);
 define('FS_DISABLE_RM_PLUGINS', false);
-define('FS_KEY_JSON', '13-qNXecbpwl5ACHCjCh-nTGlegZCuX-Z');
+define('FS_KEY_JSON', '');
 define('FS_PATH_JSON', '\\dinamic\\access\\valid.json');
 define('FS_VINC_JSON','https://www.googleapis.com/auth/drive.file');
 define('TIME_ZONE_CONFIG','America/La_paz');
